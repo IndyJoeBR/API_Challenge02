@@ -1,0 +1,82 @@
+body {
+  font-family: sans-serif;
+  background-color: black;
+  background-image: url("./Assets/starfield.png");
+
+}
+
+.fullPageWrapper {
+  
+}
+
+#myJumbotron {
+  background-color: black;
+  background-size: cover;
+  padding-top: 10%;
+  padding-bottom: 20%;
+  padding-left: 5%;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  max-height: 300px;
+  margin: auto;
+  border-radius: 90px;
+}
+
+.myJumbotronWrapper {
+  border-bottom: thick solid darkgray;
+}
+
+h1 {
+  font-size: 30px;
+}
+.lead {
+  color: white;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Nasa";
+  src: url("./Assets/Nasa.ttf");
+  }
+
+.logoNASA {
+    font-size: 50px;
+    font-family: 'Nasa', Arial, sans-serif;
+    color: red;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: black;
+  border-radius: .3rem;
+}
+
+.SnN_wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  border: 2px thin red;
+}
+
+#btnSubmit {
+  margin-right: 3em;
+}
+
+.slideShowWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5vw;
+  padding-bottom: 5vs;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+.centeringTESTcss {
+  margin-left: 35vw;
+}
+
+.spaceBuffer {
+  margin-top: 50px;
+}
