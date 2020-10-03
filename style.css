@@ -80,3 +80,12 @@ h1 {
 .spaceBuffer {
   margin-top: 50px;
 }
+
+.bottomOfPage {            /* can be deleted - spacing only */
+  padding: 5vw;
+  margin: 5vw;
+}
+
+.spaceBelowCarousel {
+  margin-top: 10vw;
+}

@@ -32,7 +32,7 @@ const endYearSlider = document.querySelector('#endYearSliderRange');
 const submitBtn = document.querySelector('#btnSubmit');
 const pageUpBtn = document.querySelector('#btnPageUp');
 const pageDownBtn = document.querySelector('#btnPageDown');
-const singleCardWrapper = document.querySelector('.carousel-inner');
+const singleCardWrapper = document.querySelector('#insertCardsHere');
 
 const firstCardattribute = "carousel-item active";
 const restOfTheCardsattribute = "carousel-item";
@@ -114,89 +114,191 @@ function fetchResults(e) {
 
   function displayResults(jsonSearch) {
 
-      console.log("This is the results of jsonSearch.collection.items:")
-      // creates reference to search results down to items, now use data and links
-      let imageHits = jsonSearch.collection.items;     
-      let numberOfHits = imageHits.length;
-      let cardClassSetting = 0;
 
-      console.log("--------------------------------------------------------------");
+    //  While there is a firstChild in the card display html it loops through, each time
+    //  clearing out the firstChild, until is is empty - having removed all previous search results
+    while (singleCardWrapper.firstChild){
+      singleCardWrapper.removeChild(singleCardWrapper.firstChild);
+    };
+    
 
-      console.log(imageHits);
+    console.log("This is the results of jsonSearch.collection.items:")
+    // creates reference to search results down to items, now use data and links
+    let imageHits = jsonSearch.collection.items;     
+    let numberOfHits = imageHits.length;
 
-      // REMOVE PREVIOUS ELEMENTS IF NECESSARY
-        // a while loop
+    let cardClassSetting = "";
+  
+    console.log("--------------------------------------------------------------");
+  
+    console.log(imageHits);   //  ***** DELETE THIS *****
+
+
+
 
 
       
-      console.log("The number of hits on THIS page:");
-      console.log(numberOfHits);
+    console.log("The number of hits on THIS page:");   //  ***** DELETE THIS *****
+    console.log(numberOfHits);   //  ***** DELETE THIS *****
 
-      //  IF there are more than 100 hits, turn on page buttons
-      if(numberOfHits === 100 || pageNumber > 1) {   // shows buttons if above page 0 OR
-        //nav.style.display = 'block'; //shows the nav display if 10 items are in the array
-        // SHOW THE PAGE BUTTONS
-        console.log("Showing < Page >");
-        } else {
+    //  IF there are more than 100 hits, turn on page buttons
+    if(numberOfHits === 100 || pageNumber > 1) {   // shows buttons if above page 0 OR
+      //nav.style.display = 'block'; //shows the nav display if 10 items are in the array
+      // SHOW THE PAGE BUTTONS
+      console.log("Showing < Page >");
+    } else {
         //nav.style.display = 'none'; //hides the nav display if less than 10 items are in the array
         // HIDE THE PAGE BUTTONS
         console.log("Hiding page buttons");
         }
 
+    console.log("}}}}}     =====     ----- INDIVIDUAL CARDS BELOW -----      =====     {{{{{");
 
-      if(numberOfHits === 0) {              //  Are there any hits to display?
+    if(numberOfHits === 0) {              //  Are there any hits to display?
           console.log("NO RESULTS");        //  If not, send an alert
           alert("There were no hits for your search criteria.");
-      } else {      // If there are, began card display loop
+    } else {      // If there are, began card display loop
 
-        // FOR loop to go through each hit and write HTML
-        for(let i = 0; i < numberOfHits; i++) {
+      // FOR loop to go through each hit and write HTML
+      for(let i = 0; i < numberOfHits; i++) {
 
-            console.log("--------------------------------------");
+        console.log("--------------------------------------");   //  ***** DELETE THIS *****
+        console.log("We are on index:" ,i);   //  ***** DELETE THIS *****
 
-            // Determines appropriate class for card, 1st card MUST be "active"
-            if(i === 0) {
-                cardClassSetting = firstCardattribute;
-            } else {
-                cardClassSetting = restOfTheCardsattribute;
-            };
+        // Determines appropriate class for card, 1st card MUST be "active"
+        if(i === 0) {
+            cardClassSetting = "carousel-item active";
+        } else {
+            cardClassSetting = "carousel-item";
+          };
 
-            console.log("Class setting is:", cardClassSetting); // *****  DELETE  *****
+        console.log("Class setting is:", cardClassSetting); // *****  DELETE  *****
 
-            let currentHit = imageHits[i];
-            console.log(currentHit.data[0]);
+        let currentHit = imageHits[i];
+        console.log("The entire result:", currentHit.data[0]);   //  ***** DELETE THIS *****
 
-
-            //check for a short desciprtion
-            let imageDescription = currentHit.data[0].description_508;
-            if(imageDescription === undefined) {
-                imageDescription = "No description available"    // if none, provide a statment
-            };
-            console.log("This is the short descprtion:", imageDescription)
-
-            let imageTitle = currentHit.data[0].title;
-            console.log("This is the title:", imageTitle)
-
-            let imageDate = currentHit.data[0].date_created;
-            imageDate = imageDate.slice(0,10);
-            console.log("This is the date created:", imageDate)
-
-            let imageType = currentHit.data[0].media_type;
-            console.log("This is the media type:", imageType)
-
-            // Check for image availability
-            if (imageType === "image") {
-                imageURL = currentHit.links[0].href;
-            } else {
-                imageURL = defaultNoImage;  // provide a default image
-            };
-            console.log("This is the image URL:")
-            console.log(imageURL);
+        // Sets image title
+        let imageTitle = currentHit.data[0].title;
+        console.log("Title:", imageTitle);
+        // Sets the date to be displayed
+        let imageDate = currentHit.data[0].date_created;
+        imageDate = imageDate.slice(0,10);
+        // Sets the media type
+        let imageType = currentHit.data[0].media_type;
+        console.log(`Date / Media: ${imageDate} / ${imageType}`)
+        //Sets short desciprtion
+        let imageDescription = currentHit.data[0].description_508;
+        if(imageDescription === undefined) {
+            imageDescription = "No description available"    // if none, provide a statment
+        };
+        console.log("This is the short descprtion:", imageDescription);
+        // Sets image to be used
+        if (imageType === "image") {
+            imageURL = currentHit.links[0].href;  // image provided
+        } else {
+            imageURL = defaultNoImage;  // provide a default image
+          };
+        console.log("This is the image URL:", imageURL);
 
 
-            // Create HTML - appened below <div class="carousel-inner">
-            singleCardWrapper
 
+        // Create HTML - append below <div class="carousel-inner" id='insertCardsHere'>
+        console.log("--------------------------");
+        console.log("This is the singleCardWrapper:");
+        console.log(singleCardWrapper);
+        console.log("--------------------------");
+
+
+        // Create HTML lines for each card
+
+        //  1st line:  <div class="${cardClassSetting}" data-interval="10000">  -  goes into singleCardWrapper
+        let line01DIV = document.createElement('div');
+        line01DIV.setAttribute("class", cardClassSetting);
+        line01DIV.setAttribute("data-interval", "10000");
+        console.log(line01DIV); // *****  DELETE  *****
+
+        // 2nd line:  <div class="centeringTESTcss">  -  goes into 1
+        let line02DIV = document.createElement('div');
+        line02DIV.setAttribute("class", "centeringTESTcss");
+        console.log(line02DIV); // *****  DELETE  *****
+
+        // 3rd line: div class="card" style="width: 18rem;">   -  goes into 2
+        let line03DIV = document.createElement('div');
+        line03DIV.setAttribute("class", "card");
+        line03DIV.setAttribute("style", "width: 25rem;");
+        console.log(line03DIV); // *****  DELETE  *****
+
+        // 4th line: <img src="${imageURL}" class="card-img-top" alt="...">  -  goes into 3
+        let line04IMG = document.createElement('img');
+        line04IMG.setAttribute("src", imageURL);
+        line04IMG.setAttribute("class", "card-img-top");
+        line04IMG.setAttribute("alt", "...");
+        console.log(line04IMG); // *****  DELETE  *****
+
+        // 5th line: <div class="card-body">  -  goes into 3
+        let line05DIV = document.createElement('div');
+        line05DIV.setAttribute("class", "card-body");
+        console.log(line05DIV); // *****  DELETE  *****
+
+        // 6th line:  <h5 class="card-title">${imageTitle}</h5>  -  goes into 5
+        let line06H5 = document.createElement('h5');
+        line06H5.setAttribute("class", "card-title");
+        line06H5.textContent = imageTitle;
+        console.log(line06H5); // *****  DELETE  *****
+
+        // 7th line:  <h6 class="card-subtitle mb-2 text-muted">${imageDate} / ${imageType}</h6>  -  goes into 5
+        let line07H6 = document.createElement('h6');
+        line07H6.setAttribute("class", "card-subtitle mb-2 text-muted");
+        line07H6.textContent = `${imageDate} / ${imageType}`;
+        console.log(line07H6); // *****  DELETE  *****
+
+        // 8th line: <p class="card-text">${imageDescription}</p>  -  goes into 5
+        let line08P = document.createElement('p');
+        line08P.setAttribute("class","card-text");
+        line08P.textContent = `${imageDescription}`;
+        console.log(line08P); // *****  DELETE  *****
+
+        // 9th line:  <a href="${imageURL}" target="_blank" class="btn btn-primary">View Image</a>  -  goes into 5
+        let line09A = document.createElement('a');
+        line09A.setAttribute("href",`${imageURL}`);
+        line09A.setAttribute("target","_blank");
+        line09A.setAttribute("class","btn btn-primary");
+        line09A.textContent = "View Image";
+        console.log(line09A); // *****  DELETE  *****
+
+
+
+        // APPENDS
+        line05DIV.appendChild(line06H5);
+        line05DIV.appendChild(line07H6);
+        line05DIV.appendChild(line08P);
+        line05DIV.appendChild(line09A);
+
+        line03DIV.appendChild(line04IMG);
+        line03DIV.appendChild(line05DIV);
+
+        line02DIV.appendChild(line03DIV);
+
+        line01DIV.appendChild(line02DIV);
+
+        singleCardWrapper.appendChild(line01DIV)
+
+
+            /*             EXAMPLE HTML for individual card
+    1)    <div class="${cardClassSetting}" data-interval="10000">
+    2)      <div class="centeringTESTcss">
+    3)        <div class="card" style="width: 18rem;">
+    4)          <img src="${imageURL}" class="card-img-top" alt="...">
+    5)          <div class="card-body">
+    6)            <h5 class="card-title">${imageTitle}</h5>
+    7)            <h6 class="card-subtitle mb-2 text-muted">${imageDate} (${imageType})</h6>
+    8)            <p class="card-text">${imageDescription}</p>
+    9)            <a href="${imageURL}" target="_blank" class="btn btn-primary">View Image</a>
+              </div>
+             </div>
+           </div>
+        </div>
+            */
 
 
 

@@ -35,19 +35,19 @@
 
         <form>     <!--   Bootstrap - Components: Forms: Auto-sizing   -->
           
-          <div class="form-group row">
+          <div class="form-group row">  <!-- Search container -->
             <label for="inputImageSearch" class="col-sm-2 col-form-label" >Search</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" id="inputImageSearch" placeholder="Apollo 11">
             </div>
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row">  <!-- Starting year range -->
             <label for="customRange2" id="startYearRangeText">Start Year</label>
             <input type="range" class="custom-range" min="1950" max="2019" value="1950" id="startYearRange">
           </div>
 
-          <div class="form-group row">
+          <div class="form-group row">  <!-- Ending year range -->
             <label for="customRange2" id="endYearRangeText">End Year</label>
             <input type="range" class="custom-range" min="1951" max="2020" value="2020" id="endYearRange">
           </div>
@@ -63,14 +63,11 @@
               <button type="button" class="btn btn-primary" id="btnPageDown">&lt;</button>
               <h5 id="pageChangeBtnText">&nbsp&nbsp&nbsp Page &nbsp&nbsp&nbsp</h5>
               <button type="button" class="btn btn-primary" id="btnPageUp">&gt;</button>
-            
             </div>
 
           </div>   <!--   END OF: Button toolbar   -->
 
-
         </form>
-
 
       </div>  <!--   END OF: Search & Navigation   -->
 
@@ -82,89 +79,17 @@
 
 
       <!--   Thumbnail Choices   -->
-    <div class="slideShowWrapper">  <!--   BEGINNING OF: Thumbnail Choices   -->
-
-
+    <div class="slideShowWrapper">
 
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
+        <div class="carousel-inner" id='insertCardsHere'>
 
-          <!--   This is what I will write to the "carousel-inner"   -->
-          <div class="carousel-item active" data-interval="10000">
-            <div class="centeringTESTcss">
-              <div class="card" style="width: 18rem;">
-                  <img src="https://images-assets.nasa.gov/image/PIA20187/PIA20187~thumb.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title 1</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Date (image type)</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="https://images-assets.nasa.gov/image/PIA20187/PIA20187~thumb.jpg" target="_blank" class="btn btn-primary">View Image</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--   This is what I will write to the "carousel-inner"   -->
 
-          <div class="carousel-item" data-interval="false">
-            <div class="centeringTESTcss">
-              <div class="card" style="width: 18rem;">
-                <img src="https://images-assets.nasa.gov/image/PIA19050/PIA19050~thumb.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title 2</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Date (image type)</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="https://images-assets.nasa.gov/image/PIA19050/PIA19050~thumb.jpg" target="_blank" class="btn btn-primary">View Image</a>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <div class="carousel-item" data-interval="false">
-            <div class="centeringTESTcss">
-              <div class="card" style="width: 18rem;">
-                <img src="https://images-assets.nasa.gov/image/PIA18920/PIA18920~thumb.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title 3</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Date (image type)</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="https://images-assets.nasa.gov/image/PIA18920/PIA18920~thumb.jpg" target="_blank" class="btn btn-primary">View Image</a>
-                </div>
-              </div>
-            </div>
-          </div>
+        
 
-          <div class="carousel-item" data-interval="false">
+        </div>  <!--   END OF: Inner Carousel   -->
 
-          <div class="centeringTESTcss">
-            <div class="card" style="width: 18rem;">
-              <img src="https://images-assets.nasa.gov/image/PIA20696/PIA20696~thumb.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title 4</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Date (image type)</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="https://images-assets.nasa.gov/image/PIA20696/PIA20696~thumb.jpg" target="_blank" class="btn btn-primary">View Image</a>
-              </div>
-            </div>
-          </div>
-
-          </div>
-          <div class="carousel-item" data-interval="false">
-
-          <div class="centeringTESTcss">
-            <div class="card" style="width: 18rem;">
-              <img src="./Assets/noImageAvailable.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Card title 5</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Date (image type)</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="./Assets/noImageAvailable.png" target="_blank" class="btn btn-primary">View Image</a>
-              </div>
-            </div>
-          </div>
-
-          </div>
-
-        </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
@@ -175,30 +100,10 @@
         </a>
       </div>  <!--   END OF: Carousel   -->
 
-
-
-
- 
-      <div class="spaceBuffer"></div>
-
-        <div class="card" style="width: 18rem;">
-          <img src="https://images-assets.nasa.gov/image/PIA20187/PIA20187~thumb.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title 1</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Date</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="https://images-assets.nasa.gov/image/PIA20187/PIA20187~thumb.jpg" target="_blank" class="btn btn-primary">View Image</a>
-          </div>
-        </div>
-
-      </div>
-
-
-
     </div>   <!--   END OF: Thumbnail Choices   -->
 
 
-      
+    <div class="bottomOfPage"></div>
 
 
 
