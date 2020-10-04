@@ -27,12 +27,18 @@ let imageURL = "";
 // Search Form & Navigation
 const searchForm = document.querySelector('form');
 const searchTerm = document.querySelector('#inputImageSearch');
-const startYearSlider = document.querySelector('#startYearSliderRange');
-const endYearSlider = document.querySelector('#endYearSliderRange');
 const submitBtn = document.querySelector('#btnSubmit');
 const pageUpBtn = document.querySelector('#btnPageUp');
 const pageDownBtn = document.querySelector('#btnPageDown');
 const singleCardWrapper = document.querySelector('#insertCardsHere');
+
+const startYearSliderRange = document.querySelector('#startYearSliderRange');
+const endYearSliderRange = document.querySelector('#endYearSliderRange');
+console.log("The start Year slider range:", startYearSliderRange);
+console.log("The end Year slider range:", endYearSliderRange);
+console.log("Starting Year is: ", startYearSliderRange.value);
+console.log("Ending Year is: ", endYearSliderRange.value);
+
 
 const firstCardattribute = "carousel-item active";
 const restOfTheCardsattribute = "carousel-item";
@@ -59,7 +65,7 @@ let pageNumber = 1;
 
 // Set Range Sliders
 let searchstartYearSlider = 1950;
-let searchendYearSlider = thisYear;
+let searchendYearSliderRange = thisYear;
 let searchstartYearSliderMax = thisYear - 1;
 
 console.log("Start year slider max year");
@@ -68,13 +74,13 @@ console.log("Start year max:", searchstartYearSliderMax)
 
 
 console.log("End year slider max year");
-console.log("End year type:", typeof searchendYearSlider);
-console.log("End year max:", searchendYearSlider);
+console.log("End year type:", typeof searchendYearSliderRange);
+console.log("End year max:", searchendYearSliderRange);
 
 
 
-//startYearSlider.setAttribute("max", searchstartYearSliderMax);
-//endYearSlider.setAttribute("max", searchendYearSlider);
+//startYearSliderRange.setAttribute("max", searchstartYearSliderMax);
+//endYearSliderRange.setAttribute("max", searchendYearSliderRange);
 
 
 
@@ -89,25 +95,24 @@ function fetchResults(e) {
 
     e.preventDefault();             // prevents request from actually being sent, stops refresh
 
-
     console.log("Data from search box:", searchTerm.value)
-    //console.log("Data from start year:", startYearSlider.value)
-    //console.log("Data from end year:", endYearSlider.value)
+    //console.log("Data from start year:", startYearSliderRange.value)
+    //console.log("Data from end year:", endYearSliderRange.value)
     
     // get results
-    searchURL = nasaImageBaseURL + "?q=" + searchTerm.value + "&year_start=" + 1950 + "&year_end=" + 2020 + "&page=" + pageNumber;
+    searchURL = nasaImageBaseURL + "?q=" + searchTerm.value + "&year_start=" + 1950 + "&year_end=" + 2020 + "&media_type=image&page=" + pageNumber;
 
     console.log(searchURL);
 
     //   *****   FETCH NASA SEARCH RESULTS   *****
     fetch(searchURL)              // give our search url to fetch and
     .then(function(result) {      // when the promise it creates is resolved
-    console.log(result)           // we log those results ('result')
-    return result.json();         // and convert those results into a json object
-  })                              // once that promis is resolved
+      console.log(result)           // we log those results ('result')
+      return result.json();         // and convert those results into a json object
+    })                              // once that promis is resolved
     .then(function(jsonSearch) {        // the json is passed to a new function that then
       displayResults(jsonSearch);       // moved the console.log to a displayResults() function
-  });
+    });
 
 };  //  End of Fetch results
 
@@ -133,13 +138,9 @@ function fetchResults(e) {
   
     console.log(imageHits);   //  ***** DELETE THIS *****
 
-
-
-
-
       
-    console.log("The number of hits on THIS page:");   //  ***** DELETE THIS *****
-    console.log(numberOfHits);   //  ***** DELETE THIS *****
+    console.log("The number of hits on THIS page:", numberOfHits);   //  ***** DELETE THIS *****
+
 
     //  IF there are more than 100 hits, turn on page buttons
     if(numberOfHits === 100 || pageNumber > 1) {   // shows buttons if above page 0 OR
@@ -172,22 +173,17 @@ function fetchResults(e) {
             cardClassSetting = "carousel-item";
           };
 
-        console.log("Class setting is:", cardClassSetting); // *****  DELETE  *****
-
         let currentHit = imageHits[i];
-        console.log("The entire result:", currentHit.data[0]);   //  ***** DELETE THIS *****
 
         // Sets image title
         let imageTitle = currentHit.data[0].title;
-        console.log("Title:", imageTitle);
         // Sets the date to be displayed
         let imageDate = currentHit.data[0].date_created;
         imageDate = imageDate.slice(0,10);
         // Sets the media type
         let imageType = currentHit.data[0].media_type;
-        console.log(`Date / Media: ${imageDate} / ${imageType}`)
         //Sets short desciprtion
-        let imageDescription = currentHit.data[0].description_508;
+        let imageDescription = currentHit.data[0].description_508;  // .description can be excessively long
         if(imageDescription === undefined) {
             imageDescription = "No description available"    // if none, provide a statment
         };
@@ -198,16 +194,6 @@ function fetchResults(e) {
         } else {
             imageURL = defaultNoImage;  // provide a default image
           };
-        console.log("This is the image URL:", imageURL);
-
-
-
-        // Create HTML - append below <div class="carousel-inner" id='insertCardsHere'>
-        console.log("--------------------------");
-        console.log("This is the singleCardWrapper:");
-        console.log(singleCardWrapper);
-        console.log("--------------------------");
-
 
         // Create HTML lines for each card
 
@@ -215,48 +201,41 @@ function fetchResults(e) {
         let line01DIV = document.createElement('div');
         line01DIV.setAttribute("class", cardClassSetting);
         line01DIV.setAttribute("data-interval", "10000");
-        console.log(line01DIV); // *****  DELETE  *****
 
         // 2nd line:  <div class="centeringTESTcss">  -  goes into 1
         let line02DIV = document.createElement('div');
         line02DIV.setAttribute("class", "centeringTESTcss");
-        console.log(line02DIV); // *****  DELETE  *****
 
         // 3rd line: div class="card" style="width: 18rem;">   -  goes into 2
         let line03DIV = document.createElement('div');
         line03DIV.setAttribute("class", "card");
-        line03DIV.setAttribute("style", "width: 25rem;");
-        console.log(line03DIV); // *****  DELETE  *****
+        line03DIV.setAttribute("style", "width: 30rem;");
 
         // 4th line: <img src="${imageURL}" class="card-img-top" alt="...">  -  goes into 3
         let line04IMG = document.createElement('img');
         line04IMG.setAttribute("src", imageURL);
         line04IMG.setAttribute("class", "card-img-top");
         line04IMG.setAttribute("alt", "...");
-        console.log(line04IMG); // *****  DELETE  *****
 
         // 5th line: <div class="card-body">  -  goes into 3
         let line05DIV = document.createElement('div');
         line05DIV.setAttribute("class", "card-body");
-        console.log(line05DIV); // *****  DELETE  *****
 
         // 6th line:  <h5 class="card-title">${imageTitle}</h5>  -  goes into 5
         let line06H5 = document.createElement('h5');
         line06H5.setAttribute("class", "card-title");
         line06H5.textContent = imageTitle;
-        console.log(line06H5); // *****  DELETE  *****
 
         // 7th line:  <h6 class="card-subtitle mb-2 text-muted">${imageDate} / ${imageType}</h6>  -  goes into 5
         let line07H6 = document.createElement('h6');
         line07H6.setAttribute("class", "card-subtitle mb-2 text-muted");
-        line07H6.textContent = `${imageDate} / ${imageType}`;
-        console.log(line07H6); // *****  DELETE  *****
+        line07H6.textContent = `${imageDate}`;
+          // IF site is expanded beyond images, add ${imageType} after date
 
         // 8th line: <p class="card-text">${imageDescription}</p>  -  goes into 5
         let line08P = document.createElement('p');
         line08P.setAttribute("class","card-text");
         line08P.textContent = `${imageDescription}`;
-        console.log(line08P); // *****  DELETE  *****
 
         // 9th line:  <a href="${imageURL}" target="_blank" class="btn btn-primary">View Image</a>  -  goes into 5
         let line09A = document.createElement('a');
@@ -264,8 +243,6 @@ function fetchResults(e) {
         line09A.setAttribute("target","_blank");
         line09A.setAttribute("class","btn btn-primary");
         line09A.textContent = "View Image";
-        console.log(line09A); // *****  DELETE  *****
-
 
 
         // APPENDS
@@ -301,17 +278,8 @@ function fetchResults(e) {
             */
 
 
-
-
-        };    //  END of for loop to write HTML cards
-
-
-      };   // END OF Are there images to display loop
-
-
-
-      
-
+        };    //  END OF For Loop to write HTML cards
+      };   // END OF There are images to display condition.
   };    //  END OF displayResults function
 
 
@@ -328,19 +296,19 @@ function fetchResults(e) {
 
 
 //   *****   BUTTON FUNCTIONS   *****
-function pageUp() {              // 'e' - the original object - is passed into the function
+function pageUp(e) {              // 'e' - the original object - is passed into the function
     pageNumber++;       // increases the value of the pageNumber variable
-    //fetchResults(e);    // rerun the fetch with a new pageNumber in the URL (line 49)
+    fetchResults(e);    // rerun the fetch with a new pageNumber in the URL (line 49)
     console.log("Page number:", pageNumber);    // log the page number for review
 };
 
-function pageDown() {       // 'e' - the original object - is passed into the function
+function pageDown(e) {       // 'e' - the original object - is passed into the function
     if(pageNumber > 1) {    // if the button is pressed and the pageNumber is above 1st page,
     pageNumber--;           //     it reduces the pageNumber by 1   (pageNumber - 1)
     } else {                // if this is the first page (page 0),
     return;                 //     the button simple doesn't work
     }
-//fetchResults(e);          // rerun the fetch with a new pageNumber in the URL (line 49)
+fetchResults(e);          // rerun the fetch with a new pageNumber in the URL (line 49)
 console.log("Page number:", pageNumber);    // log the page number for review
 };
 
@@ -368,10 +336,6 @@ function fetchJumobtronImage(imageURL) {
 
 //   *****   SENDS APOD OR DEFAULT IMAGE TO JUMBOTRON   ***** 
 function sendImageToJumbotron(jsonAPOD, imageError) {
-    console.log("I have received Jason.")       //  **********   DELETE   **********
-    console.log(jsonAPOD.url);                  //  **********   DELETE   **********
-    console.log(jsonAPOD.media_type);           //  **********   DELETE   **********
-    console.log(jsonAPOD.code);                 //  **********   DELETE   **********
 
     if(jsonAPOD.media_type === "video" || jsonAPOD.code === 404) {
         console.log("No image available; use default NASA image.");
@@ -416,12 +380,13 @@ function dateForAPOD(todaysDate, thisYear) {
 
 
 ///   *****   WHEN THE EAGLE HAS LANDED   ***** 
-//  fetchJumobtronImage(apodUrl);   *********  RESTORE NEAR COMPLETION
+fetchJumobtronImage(apodUrl);
 
-
+/*
 //  *********      RESTORE fetchJumobtronImage ABOVE UPON COMPLETION   *************
 let addedInlineStyle = "background-image: url('" + defaultJumobtronImage + "')";
 console.log("TEMPORARY - set to default so as not to use up daily uses")
 console.log(addedInlineStyle);          //  **********   DELETE   **********
 jumbotronDIV.setAttribute("style", addedInlineStyle);
 //  **************      DELETE ABOVE SECTION UPON COMPLETION   *********************
+*/

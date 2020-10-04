@@ -54,10 +54,10 @@ h1 {
 }
 
 .SnN_wrapper {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  /*margin-left: auto;
+  margin-right: auto;  */
   width: 75%;
-  border: 2px thin red;
 }
 
 #btnSubmit {
@@ -74,7 +74,7 @@ h1 {
 }
 
 .centeringTESTcss {
-  margin-left: 35vw;
+  margin-left: 30vw;  /* keeps image off navigation arrows */
 }
 
 .spaceBuffer {
@@ -88,4 +88,36 @@ h1 {
 
 .spaceBelowCarousel {
   margin-top: 10vw;
+}
+
+.sliderStart {
+  width: 20vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.sliderEnd {
+  width: 20vw;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.contrastSpace {
+color: white;
+}
+
+.mySearchBox {
+  width: 40vw;
+}
+
+.btnEngage {
+  margin-right: 10vw;
+}
+
+#btnPageDown {
+  margin-left: 10vw;
+}
+
+.startingSliderValue {
+margin-right: 5vw;
 }
