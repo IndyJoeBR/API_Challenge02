@@ -79,11 +79,6 @@ console.log("End year max:", searchendYearSliderRange);
 
 
 
-//startYearSliderRange.setAttribute("max", searchstartYearSliderMax);
-//endYearSliderRange.setAttribute("max", searchendYearSliderRange);
-
-
-
 // **********   SITE FUNCTIONS   **********
 
 //   **********   SEARCH ENGINE & DISPLAY   **********
