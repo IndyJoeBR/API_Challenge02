@@ -64,7 +64,7 @@ let pageNumber = 1;
 
 
 // Set Range Sliders
-let searchstartYearSlider = 1950;
+let searchstartYearSlider = 1958;
 let searchendYearSliderRange = thisYear;
 let searchstartYearSliderMax = thisYear - 1;
 
