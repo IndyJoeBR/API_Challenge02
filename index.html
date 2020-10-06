@@ -35,6 +35,7 @@
 
       <form>     <!--   Bootstrap - Components: Forms: Auto-sizing   -->
           
+        <!-- Search box -->
         <div class="form-group row">  <!-- Search container -->
           <label for="inputImageSearch" class="col-sm-2 col-form-label contrastSpace">Search</label>
           <div class="col-sm-10">
@@ -42,21 +43,24 @@
           </div>
         </div>
 
+        <!-- Sliders-->
         <div class="form-group row">  <!-- Starting year range -->
           <label for="customRange2" class="contrastSpace">Start Year</label>
-          <input type="range" class="custom-range sliderStart" min="1958" max="2019" value="1958" id="startYearSliderRange"><span class="startingSliderOutput contrastSpace">1958</span>
+
+          <input type="range" class="custom-range sliderStart" min="1958" max="2020" value="1958" id="startYearSliderRange" oninput="startSliderUpdates(this.value)"><span class="startingSliderOutput contrastSpace">1958</span>
+
                                       <!-- Ending year range -->
           <label for="customRange2" class="contrastSpace">End Year</label>
-          <input type="range" class="custom-range sliderEnd" min="1951" max="2020" value="2020" id="endYearSliderRange"><span class="endingSliderOutput contrastSpace">2020</span>
+
+          <input type="range" class="custom-range sliderEnd" min="1959" max="2020" value="2020" id="endYearSliderRange" oninput="endSliderUpdates(this.value)"><span class="endingSliderOutput contrastSpace">2020</span>
+          
         </div>
 
-
+        <!-- Page Down/Up Buttons-->
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            
           <div class="btn-group mr-2 btnEngage" role="group" aria-label="First group">
             <button type="submit" class="btn btn-danger" id="btnSubmit">Engage</button>
           </div>
-            
           <div class="btn-group mr-2" role="group" aria-label="Second group">
             <button type="button" class="btn btn-primary" id="btnPageDown">&lt;</button>
             <h5 class="contrastSpace" id="pageChangeBtnText">&nbsp&nbsp&nbsp Page &nbsp&nbsp&nbsp</h5>
@@ -64,9 +68,7 @@
           </div>
 
         </div>   <!--   END OF: Button toolbar   -->
-
       </form>
-
     </div>  <!--   END OF: Search & Navigation   -->
 
 
@@ -82,9 +84,7 @@
       <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" id='insertCardsHere'>
 
-
-
-        
+          
 
         </div>  <!--   END OF: Inner Carousel   -->
 
@@ -97,27 +97,12 @@
           <span class="sr-only">Next</span>
         </a>
       </div>  <!--   END OF: Carousel   -->
-
     </div>   <!--   END OF: Thumbnail Choices   -->
 
 
     <div class="bottomOfPage"></div>
 
-
-
-
-
-
-
-
-
-
-
-
     </div>  <!--   END OF: Full Page wrapper   -->
-
-
-
 
     
 

@@ -34,10 +34,9 @@ const singleCardWrapper = document.querySelector('#insertCardsHere');
 
 const startYearSliderRange = document.querySelector('#startYearSliderRange');
 const endYearSliderRange = document.querySelector('#endYearSliderRange');
-console.log("The start Year slider range:", startYearSliderRange);
-console.log("The end Year slider range:", endYearSliderRange);
-console.log("Starting Year is: ", startYearSliderRange.value);
-console.log("Ending Year is: ", endYearSliderRange.value);
+const startSliderOutput = document.querySelector('.startingSliderOutput');
+const endSliderOutput = document.querySelector('.endingSliderOutput');
+
 
 
 const firstCardattribute = "carousel-item active";
@@ -61,21 +60,9 @@ let apodUrl = nasaAPODurlBase + APODdate + myNASAkey;   // url for jumbotron
 
 //  Search variables
 let pageNumber = 1;
+startYear = 1958;
+endYear = thisYear;
 
-
-// Set Range Sliders
-let searchstartYearSlider = 1958;
-let searchendYearSliderRange = thisYear;
-let searchstartYearSliderMax = thisYear - 1;
-
-console.log("Start year slider max year");
-console.log("Start year max type:", typeof searchstartYearSliderMax);
-console.log("Start year max:", searchstartYearSliderMax)
-
-
-console.log("End year slider max year");
-console.log("End year type:", typeof searchendYearSliderRange);
-console.log("End year max:", searchendYearSliderRange);
 
 
 
@@ -94,8 +81,19 @@ function fetchResults(e) {
     //console.log("Data from start year:", startYearSliderRange.value)
     //console.log("Data from end year:", endYearSliderRange.value)
     
+
+    // get start & end years
+    startYear = startSliderOutput.innerHTML;
+    endYear = endSliderOutput.innerHTML;
+
+    //  Corrects the end year to always be greater than the starting year of the search
+    if (endYear < startYear) {
+      endYear = parseInt(startYear) + 1;
+      alert(`The end year cannot be earlier than the start year.\n\nThe end year used will be ${endYear} instead.\n\nThe start and end years may, however be the same.`)
+    };
+
     // get results
-    searchURL = nasaImageBaseURL + "?q=" + searchTerm.value + "&year_start=" + 1950 + "&year_end=" + 2020 + "&media_type=image&page=" + pageNumber;
+    searchURL = nasaImageBaseURL + "?q=" + searchTerm.value + "&year_start=" + startYear + "&year_end=" + endYear + "&media_type=image&page=" + pageNumber;
 
     console.log(searchURL);
 
@@ -148,7 +146,7 @@ function fetchResults(e) {
         console.log("Hiding page buttons");
         }
 
-    console.log("}}}}}     =====     ----- INDIVIDUAL CARDS BELOW -----      =====     {{{{{");
+    console.log("}}}}}=====----- INDIVIDUAL CARDS BELOW -----====={{{{{");
 
     if(numberOfHits === 0) {              //  Are there any hits to display?
           console.log("NO RESULTS");        //  If not, send an alert
@@ -278,16 +276,18 @@ function fetchResults(e) {
   };    //  END OF displayResults function
 
 
+//   *****   SLIDER FUNCTIONS   *****  
+function startSliderUpdates(startInput) {
 
+  startSliderOutput.innerHTML = startInput;
+  
+}
 
+function endSliderUpdates(endInput) {
 
+  endSliderOutput.innerHTML = endInput;
 
-
-
-
-
-
-
+}
 
 
 //   *****   BUTTON FUNCTIONS   *****
@@ -309,8 +309,6 @@ console.log("Page number:", pageNumber);    // log the page number for review
 
 
 
-
-
 //   **********   JUMBOTRON   **********
 //   *****   FETCH JUMBOTRON IMAGE   ***** 
 function fetchJumobtronImage(imageURL) {
@@ -319,7 +317,7 @@ function fetchJumobtronImage(imageURL) {
             return response.json();
         })
         .then(function(jsonAPOD) {
-            console.log("Sending to send function:", jsonAPOD);
+            console.log("Image sent to jumbotron:", jsonAPOD);
             sendImageToJumbotron(jsonAPOD);
         })
         .catch(function(err) {
