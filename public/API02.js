@@ -335,7 +335,7 @@ function fetchJumobtronImage(imageURL) {
 //   *****   SENDS APOD OR DEFAULT IMAGE TO JUMBOTRON   ***** 
 function sendImageToJumbotron(jsonAPOD, imageError) {
 
-    if(jsonAPOD.media_type === "video" || jsonAPOD.code === 404) {
+    if(jsonAPOD.media_type === "video" || jsonAPOD.code === 404 || jsonAPOD.media_type === "other") {
         console.log("No image available; use default NASA image.");
         
         let addedInlineStyle = "background-image: url('" + defaultJumobtronImage + "')";
