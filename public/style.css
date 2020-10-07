@@ -117,15 +117,19 @@ color: white;
 /* Responsive for devices below 480px  */
 @media only screen and (max-width: 480px) {
   .centeringTESTcss {
-    margin-left: 0vw;  /* keeps image off navigation arrows */
+    margin-left: 0vw;  /* keeps image to center of viewport */
   }
 
-  #btnPageDown {
+  #btnPageDown {   /* Moves <page> buttons closer to engage-button */
     margin-left: 10vw;
   }
 
-  .startingSliderOutput {
+  .startingSliderOutput {   /* Pushes end-year slider down a line */
     margin-right: 20vw;
+  }
+
+  .viewImageButtonShift {   /* Shift 'view image' button to center */
+    margin: 120px;
   }
 
 }

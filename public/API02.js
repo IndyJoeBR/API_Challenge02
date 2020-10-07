@@ -36,6 +36,7 @@ const startYearSliderRange = document.querySelector('#startYearSliderRange');
 const endYearSliderRange = document.querySelector('#endYearSliderRange');
 const startSliderOutput = document.querySelector('.startingSliderOutput');
 const endSliderOutput = document.querySelector('.endingSliderOutput');
+const pageNavigationDisplay = document.querySelector('nav');
 
 const firstCardattribute = "carousel-item active";
 const restOfTheCardsattribute = "carousel-item";
@@ -56,10 +57,14 @@ let thisYear = parseInt(todaysDate.slice(0,4));
 let APODdate = dateForAPOD(todaysDate, thisYear);     // creates a date for the url
 let apodUrl = nasaAPODurlBase + APODdate + myNASAkey;   // url for jumbotron
 
-//  Search variables
-let pageNumber = 1;
+// Search variables
 startYear = 1958;
 endYear = thisYear;
+
+// Set initial styling for Page buttons
+pageNavigationDisplay.style.display = 'none';
+let pageNumber = 1;
+//let displayPageButtons = false;
 
 
 
@@ -133,29 +138,31 @@ function fetchResults(e) {
     console.log("The number of hits on THIS page:", numberOfHits);   //  ***** DELETE THIS *****
 
 
+    //  Page Up/Down Display
     //  IF there are more than 100 hits, turn on page buttons
     if(numberOfHits === 100 || pageNumber > 1) {   // shows buttons if above page 0 OR
-      //nav.style.display = 'block'; //shows the nav display if 10 items are in the array
+      pageNavigationDisplay.style.display = 'block'; //shows the nav display if 100 items are in the array or user is above page 1
       // SHOW THE PAGE BUTTONS
       console.log("Showing < Page >");
     } else {
-        //nav.style.display = 'none'; //hides the nav display if less than 10 items are in the array
+      pageNavigationDisplay.style.display = 'none'; //hides the nav display if less than 100 items are in the array
         // HIDE THE PAGE BUTTONS
         console.log("Hiding page buttons");
-        }
+      }
+
 
     console.log("}}}}}=====----- INDIVIDUAL CARDS BELOW -----====={{{{{");
 
-    if(numberOfHits === 0) {              //  Are there any hits to display?
-          console.log("NO RESULTS");        //  If not, send an alert
+    if(numberOfHits === 0) {             //  Are there any hits to display?
+          console.log("NO RESULTS");     //  If not, send an alert
           alert("There were no hits for your search criteria.");
     } else {      // If there are, began card display loop
 
       // FOR loop to go through each hit and write HTML
       for(let i = 0; i < numberOfHits; i++) {
 
-        console.log("--------------------------------------");   //  ***** DELETE THIS *****
-        console.log("We are on index:" ,i);   //  ***** DELETE THIS *****
+        console.log("--------------------------------------");
+        console.log("This is index:" ,i);
 
         // Determines appropriate class for card, 1st card MUST be "active"
         if(i === 0) {
@@ -232,7 +239,7 @@ function fetchResults(e) {
         let line09A = document.createElement('a');
         line09A.setAttribute("href",`${imageURL}`);
         line09A.setAttribute("target","_blank");
-        line09A.setAttribute("class","btn btn-primary");
+        line09A.setAttribute("class","btn btn-primary viewImageButtonShift");
         line09A.textContent = "View Image";
 
 
@@ -261,7 +268,7 @@ function fetchResults(e) {
     6)            <h5 class="card-title">${imageTitle}</h5>
     7)            <h6 class="card-subtitle mb-2 text-muted">${imageDate} (${imageType})</h6>
     8)            <p class="card-text">${imageDescription}</p>
-    9)            <a href="${imageURL}" target="_blank" class="btn btn-primary">View Image</a>
+    9)            <a href="${imageURL}" target="_blank" class="btn btn-primary viewImageButtonShift">View Image</a>
               </div>
              </div>
            </div>
