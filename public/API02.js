@@ -37,8 +37,6 @@ const endYearSliderRange = document.querySelector('#endYearSliderRange');
 const startSliderOutput = document.querySelector('.startingSliderOutput');
 const endSliderOutput = document.querySelector('.endingSliderOutput');
 
-
-
 const firstCardattribute = "carousel-item active";
 const restOfTheCardsattribute = "carousel-item";
 
@@ -202,7 +200,7 @@ function fetchResults(e) {
         // 3rd line: div class="card" style="width: 18rem;">   -  goes into 2
         let line03DIV = document.createElement('div');
         line03DIV.setAttribute("class", "card");
-        line03DIV.setAttribute("style", "width: 30rem;");
+        line03DIV.setAttribute("style", "width: 25rem;");
 
         // 4th line: <img src="${imageURL}" class="card-img-top" alt="...">  -  goes into 3
         let line04IMG = document.createElement('img');
@@ -257,7 +255,7 @@ function fetchResults(e) {
             /*             EXAMPLE HTML for individual card
     1)    <div class="${cardClassSetting}" data-interval="10000">
     2)      <div class="centeringTESTcss">
-    3)        <div class="card" style="width: 18rem;">
+    3)        <div class="card" style="width: 16rem;">
     4)          <img src="${imageURL}" class="card-img-top" alt="...">
     5)          <div class="card-body">
     6)            <h5 class="card-title">${imageTitle}</h5>

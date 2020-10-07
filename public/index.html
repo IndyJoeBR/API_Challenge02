@@ -44,27 +44,34 @@
         </div>
 
         <!-- Sliders-->
-        <div class="form-group row">  <!-- Starting year range -->
+        <div class="form-group row">
+          
+          <!-- Starting year slider -->
           <label for="customRange2" class="contrastSpace">Start Year</label>
 
           <input type="range" class="custom-range sliderStart" min="1958" max="2020" value="1958" id="startYearSliderRange" oninput="startSliderUpdates(this.value)"><span class="startingSliderOutput contrastSpace">1958</span>
 
-                                      <!-- Ending year range -->
+          <!-- Ending year slider -->
           <label for="customRange2" class="contrastSpace">End Year</label>
 
           <input type="range" class="custom-range sliderEnd" min="1959" max="2020" value="2020" id="endYearSliderRange" oninput="endSliderUpdates(this.value)"><span class="endingSliderOutput contrastSpace">2020</span>
           
         </div>
 
-        <!-- Page Down/Up Buttons-->
+        <!-- Button Toolbar-->
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+          <!-- Engage Button-->
           <div class="btn-group mr-2 btnEngage" role="group" aria-label="First group">
             <button type="submit" class="btn btn-danger" id="btnSubmit">Engage</button>
           </div>
+
+          <!-- Page Down/Up Buttons-->
           <div class="btn-group mr-2" role="group" aria-label="Second group">
             <button type="button" class="btn btn-primary" id="btnPageDown">&lt;</button>
             <h5 class="contrastSpace" id="pageChangeBtnText">&nbsp&nbsp&nbsp Page &nbsp&nbsp&nbsp</h5>
             <button type="button" class="btn btn-primary" id="btnPageUp">&gt;</button>
+
           </div>
 
         </div>   <!--   END OF: Button toolbar   -->
