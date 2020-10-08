@@ -10,7 +10,8 @@
 //                                    |  date-search   |
 //  for the date use today's month# and day#... for the year
 //  year_range = today's year# - 2015
-//  yearForImageOfDay = Math.floor(Math.random * year_range) + 2015       (gives a range of 2015 to 'this' year)
+//  yearForImageOfDay = Math.floor(Math.random * year_range) + 2015
+//   (gives a range of 2015 to 'this' year)
 //
 
 //   *****   DECLARATIONS   *****
@@ -64,7 +65,7 @@ endYear = thisYear;
 // Set initial styling for Page buttons
 pageNavigationDisplay.style.display = 'none';
 let pageNumber = 1;
-//let displayPageButtons = false;
+
 
 
 
@@ -91,7 +92,8 @@ function fetchResults(e) {
 
     //  Corrects the end year to always be greater than the starting year of the search
     if (endYear < startYear) {
-      endYear = parseInt(startYear) + 1;
+      endYear = parseInt(startYear) + 1;    // sets new end year to start year + 1
+      endSliderOutput.innerHTML = endYear;  // adjusts year on end year slider
       alert(`The end year cannot be earlier than the start year.\n\nThe end year used will be ${endYear} instead.\n\nThe start and end years may, however be the same.`)
     };
 
@@ -142,22 +144,25 @@ function fetchResults(e) {
     //  IF there are more than 100 hits, turn on page buttons
     if(numberOfHits === 100 || pageNumber > 1) {   // shows buttons if above page 0 OR
       pageNavigationDisplay.style.display = 'block'; //shows the nav display if 100 items are in the array or user is above page 1
-      // SHOW THE PAGE BUTTONS
       console.log("Showing < Page >");
-    } else {
-      pageNavigationDisplay.style.display = 'none'; //hides the nav display if less than 100 items are in the array
-        // HIDE THE PAGE BUTTONS
-        console.log("Hiding page buttons");
+      if(pageNumber === 1) {
+        pageDownBtn.style.visibility = 'hidden';
+      } else {  
+          pageDownBtn.style.visibility = 'visible';
       }
+    } else {
+        pageNavigationDisplay.style.display = 'none'; //hides the nav display if less than 100 items are in the array
+        console.log("Hiding page buttons");
+      };
 
 
     console.log("}}}}}=====----- INDIVIDUAL CARDS BELOW -----====={{{{{");
 
     if(numberOfHits === 0) {             //  Are there any hits to display?
-          console.log("NO RESULTS");     //  If not, send an alert
-          alert("There were no hits for your search criteria.");
+      console.log("NO RESULTS");     //  If not, send an alert
+      alert("There were no hits for your search criteria.");
     } else {      // If there are, began card display loop
-
+      
       // FOR loop to go through each hit and write HTML
       for(let i = 0; i < numberOfHits; i++) {
 
@@ -259,7 +264,7 @@ function fetchResults(e) {
         singleCardWrapper.appendChild(line01DIV)
 
 
-            /*             EXAMPLE HTML for individual card
+            /*      *****     EXAMPLE HTML for individual card     *****
     1)    <div class="${cardClassSetting}" data-interval="10000">
     2)      <div class="centeringTESTcss">
     3)        <div class="card" style="width: 16rem;">
@@ -283,16 +288,12 @@ function fetchResults(e) {
 
 //   *****   SLIDER FUNCTIONS   *****  
 function startSliderUpdates(startInput) {
-
   startSliderOutput.innerHTML = startInput;
-  
-}
+};
 
 function endSliderUpdates(endInput) {
-
   endSliderOutput.innerHTML = endInput;
-
-}
+};
 
 
 //   *****   BUTTON FUNCTIONS   *****
@@ -337,20 +338,14 @@ function sendImageToJumbotron(jsonAPOD, imageError) {
 
     if(jsonAPOD.media_type === "video" || jsonAPOD.code === 404 || jsonAPOD.media_type === "other") {
         console.log("No image available; use default NASA image.");
-        
         let addedInlineStyle = "background-image: url('" + defaultJumobtronImage + "')";
-
-        console.log(addedInlineStyle);          //  **********   DELETE   **********
         jumbotronDIV.setAttribute("style", addedInlineStyle);
     } else {
         console.log("Sending APOD url")
         // add inline style of background-image to <div> with 'container' class
-
         let addedInlineStyle = "background-image: url('" + jsonAPOD.url + "')";
-
-        console.log(addedInlineStyle);          //  **********   DELETE   **********
         jumbotronDIV.setAttribute("style", addedInlineStyle);
-    }
+    };
 };  //  End sending random year APOD to jumbotron
 
 
@@ -377,14 +372,6 @@ function dateForAPOD(todaysDate, thisYear) {
 };  // End of random APOD date determination
 
 
-///   *****   WHEN THE EAGLE HAS LANDED   ***** 
+//   *****   WHEN THE EAGLE HAS LANDED   ***** 
+//             (the web page opens)
 fetchJumobtronImage(apodUrl);
-
-/*
-//  *********      RESTORE fetchJumobtronImage ABOVE UPON COMPLETION   *************
-let addedInlineStyle = "background-image: url('" + defaultJumobtronImage + "')";
-console.log("TEMPORARY - set to default so as not to use up daily uses")
-console.log(addedInlineStyle);          //  **********   DELETE   **********
-jumbotronDIV.setAttribute("style", addedInlineStyle);
-//  **************      DELETE ABOVE SECTION UPON COMPLETION   *********************
-*/
